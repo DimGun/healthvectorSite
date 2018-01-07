@@ -6,7 +6,6 @@ services:
     volumes:
       - "bitrix:/var/www"
       - "./www:/var/www/public"
-      - "./vendor:/var/www/vendor"
       - "./src:/var/www/src"
       - "./etc/bitrix/tmp/cache:/var/www/public/bitrix_app/cache"
       - "./etc/bitrix/tmp/managed_cache:/var/www/public/bitrix_app/managed_cache"
@@ -34,11 +33,9 @@ services:
       - php
 
   php:
-    image: php:7.1-fpm
-    build:
+    build: 
       context: "."
       dockerfile: "./etc/php/Dockerfile"
-    working_dir: "/var/www"
     environment:
       - DATABASE_USER=${DATABASE_USER}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
@@ -47,10 +44,6 @@ services:
       - XDEBUG_CONFIG=remote_host=${HOST_IP}
     volumes_from:
       - bitrix
-    volumes:
-      - "./vendor:/var/www/vendor"
-      - "./etc/php/log-stdout.conf:/usr/local/etc/php-fpm.d/zz-log.conf"
-      - "./etc/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini"
     depends_on:
       - database
 

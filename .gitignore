@@ -9,8 +9,6 @@
 
 # Боевое окружение
 /www/bitrix_app/
-.*
-!.gitignore
 /.config/
 /.local/
 /.ssh/
